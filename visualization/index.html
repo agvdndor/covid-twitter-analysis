@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BDS viz</title>
+    <title>BDS - project</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 
     <!--Leaflet CSS file-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
-   <style>
-      #mapid { 
-        height: 500px; 
-      }
-   </style>
-   <link href="main.css" rel="stylesheet" type="text/css">
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+    <link href="main.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <div id="mapid"></div>
+      <div class="header">
+      <h1>BDS - project 2020</h1>
+      <h2>Jonas Vander Vennet & Arne Vandendorpe</h2>
+    </div>
 
+    <div class="content">
+      <div class="controls">
+        <label for="keyword">Keyword:</label>
+        <input type="text" id="keyword" name="keyword">
+      </div>
+      <!-- This div contains the Leaflet map -->
+      <div id="mapid"></div>
+
+      <div class="debug-text">
+        <span>The chosen keyword is </span><span id="debug-keyword">[]</span>
+      </div>
+    </div>
 
 
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
- integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
- crossorigin=""></script>
-<script src="https://unpkg.com/topojson-client@3"></script>
- <script src="main.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="map.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
