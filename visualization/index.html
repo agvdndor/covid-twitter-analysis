@@ -5,6 +5,8 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!--Leaflet CSS file-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -19,14 +21,28 @@
 
     <div class="content">
       <div class="controls">
+        <label for="filter">Twitter Filter:</label>
+        <select id="filter" onchange="TwitterFilterChanged()">
+          <option value="language">Language</option>
+          <option value="location">Location</option>
+        </select>
+        <div id="location-warning" class="tooltip" style="display: none"><i class="material-icons" style="font-size:20x;color:red">warning</i>
+          <span class="tooltiptext">Using location-based data can decrease the amount of processable data as people may have disabled location services.</span>
+        </div>
+
         <label for="keyword">Keyword:</label>
         <input type="text" id="keyword" name="keyword">
+        <button id="keywordBtn">Search</button>
       </div>
       <!-- This div contains the Leaflet map -->
       <div id="mapid"></div>
-
-      <div class="debug-text">
-        <span>The chosen keyword is </span><span id="debug-keyword">[]</span>
+      <div class="sliderControls">
+        <input type="range" min="0" max="100" value="50" class="slider" id="dayRange" name="dayRange">
+        <datalist id="days">
+          <option label="Chris' Birthday">1980-08-26</option>
+          <option label="Apollo 11 Moon Landing">1969-07-20</option>
+          <option label="DDay">1944-06-06</option>
+        </datalist>
       </div>
     </div>
 
@@ -37,7 +53,7 @@
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
-    <script src="map.js"></script>
     <script src="main.js"></script>
+    <script src="map.js"></script>
   </body>
 </html>
