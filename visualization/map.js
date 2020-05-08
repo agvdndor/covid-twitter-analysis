@@ -143,7 +143,9 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
     fetch("countries_borders.geojson")
     .then(data => data.json())
     .then(json => AddCasesToJsonAndLoadInMap(json));
-});
+})
+// update UI elements as soon as possible
+.then(() => OnTimelineChanged());
 
 var info = L.control();
 

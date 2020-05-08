@@ -18,7 +18,7 @@ body {
 }
 
 #dayRange {
-  width: 80%;
+  width: 70%;
 }
 
 #mapid {
@@ -61,8 +61,7 @@ body {
 
 .slider {
     -webkit-appearance: none;
-    /* width: 100%; */
-    height: 15px;
+    height: 14px;
     border-radius: 5px;
     background: #d3d3d3;
     outline: none;
@@ -131,3 +130,8 @@ body {
     visibility: visible;
     opacity: 1;
   }
+
+.skip-btn {
+  border-radius: 50%;
+  font-size: 14px;;
+}

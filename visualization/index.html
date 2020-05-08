@@ -37,8 +37,12 @@
       <!-- This div contains the Leaflet map -->
       <div id="mapid"></div>
       <div class="sliderControls">
-        <span>Current date: </span> <span id="currentDateFilter">*insert date*</span>
-        <input type="range" min="0" max="100" value="100" class="slider" id="dayRange" name="dayRange">
+        <span>Selected date: </span> <span id="currentDateFilter"></span>
+        <button id="skip_back_7" class="skip-btn"><i class="material-icons" style="font-size:20x;color:black">fast_rewind</i></button>
+        <button id="skip_back_1" class="skip-btn"><i class="material-icons" style="font-size:20x;color:black">skip_previous</i></button>
+        <button id="skip_front_1" class="skip-btn"><i class="material-icons" style="font-size:20x;color:black">skip_next</i></button>
+        <button id="skip_front_7" class="skip-btn"><i class="material-icons" style="font-size:20x;color:black">fast_forward</i></button>
+        <input type="range" min="0" max="100" value="200" class="slider" id="dayRange" name="dayRange">
       </div>
     </div>
 
@@ -51,7 +55,7 @@
       var coronaTimeseriesData = null;
       var dateOffset = null;
     </script>
-    <script src="main.js"></script>
     <script src="map.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
