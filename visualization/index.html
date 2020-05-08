@@ -45,18 +45,26 @@
         <button id="skip_front_7" class="skip-btn"><i class="material-icons" style="font-size:20x;color:black">fast_forward</i></button>
         <input type="range" min="0" max="100" value="200" class="slider" id="dayRange" name="dayRange">
       </div>
+
+      <div id="twitterChartContainer" class="graphbox" style="height: 370px; width: 100%;"></div>
+      <div id="coronaChartContainer" class="graphbox" style="height: 370px; width: 100%;"></div>
     </div>
+
+    
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     <script type='text/javascript' > 
       var coronaTimeseriesData = null;
       var dateOffset = null;
     </script>
     <script src="map.js"></script>
     <script src="main.js"></script>
+    <script src="graph.js"></script>
   </body>
 </html>
