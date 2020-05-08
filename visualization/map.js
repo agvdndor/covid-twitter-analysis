@@ -1,5 +1,3 @@
-let coronaTimeseriesData = {};
-
 let map = L.map('mapid').setView([50.6352401,3.9593289], 5);
 
 
@@ -37,7 +35,8 @@ function style(feature) {
     };
 }
 
-let geojson;
+let geojson = null;
+let current_geojson_data;
 
 function highlightFeature(e) {
     var layer = e.target;
@@ -94,6 +93,48 @@ let corona_country_translation = {
 "US Naval Base Guantanamo Bay" :"US"
 }
 
+function LoadGeoJson(json) {
+    let newgeojson = L.geoJson(json, {
+        style: style,
+        onEachFeature: onEachFeature
+    })
+    if (geojson != null) geojson.removeFrom(map);
+    // add before removing previous, to not have weird transitions
+    newgeojson.addTo(map);
+    geojson = newgeojson;
+}
+
+function AddCasesToJson(json, date_offset) {
+    if (date_offset == null) {
+        let country_data = coronaTimeseriesData["Afghanistan"];
+        date_offset = country_data.length -1;
+    }
+
+    json['features'].forEach((country) => {
+        let key = country['properties']['ADMIN'];
+        let cases = "N/A";
+
+        if (key in corona_country_translation){
+            key = corona_country_translation[key];
+        }
+        if (key in coronaTimeseriesData) {
+            let country_corona_data = coronaTimeseriesData[key];
+            let useful = country_corona_data[date_offset];
+            cases = useful["confirmed"];
+        }
+        country['properties']['confirmed'] = cases;
+    });
+    return json
+}
+
+function AddCasesToJsonAndLoadInMap(json, date_offset) {
+    json = AddCasesToJson(json, date_offset);
+    current_geojson_data = json;
+    LoadGeoJson(json);
+    return json;
+}
+
+
 // load data about country locations
 fetch("https://pomber.github.io/covid19/timeseries.json")
 .then(response => response.json())
@@ -101,22 +142,7 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
 .then(() => {
     fetch("countries_borders.geojson")
     .then(data => data.json())
-    .then(json => {
-        json['features'].forEach((country) => {
-            let key = country['properties']['ADMIN'];
-            let cases = "N/A";
-            if (key in coronaTimeseriesData)
-                cases = coronaTimeseriesData[key].splice(-1)[0]['confirmed'];
-            else if (key in corona_country_translation)
-                cases = coronaTimeseriesData[corona_country_translation[key]].splice(-1)[0]['confirmed'];
-            country['properties']['confirmed'] = cases;
-        });
-        return json;
-    })
-    .then(json => geojson = L.geoJson(json, {
-        style: style,
-        onEachFeature: onEachFeature
-    }).addTo(map));
+    .then(json => AddCasesToJsonAndLoadInMap(json));
 });
 
 var info = L.control();

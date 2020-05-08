@@ -18,7 +18,7 @@ body {
 }
 
 #dayRange {
-    width: 100%;
+  width: 80%;
 }
 
 #mapid {
@@ -56,11 +56,12 @@ body {
 
 .sliderControls {
     margin-top: 10px;
+    width: 100%;
 }
 
 .slider {
     -webkit-appearance: none;
-    width: 100%;
+    /* width: 100%; */
     height: 15px;
     border-radius: 5px;
     background: #d3d3d3;

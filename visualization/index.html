@@ -37,22 +37,20 @@
       <!-- This div contains the Leaflet map -->
       <div id="mapid"></div>
       <div class="sliderControls">
-        <input type="range" min="0" max="100" value="50" class="slider" id="dayRange" name="dayRange">
-        <datalist id="days">
-          <option label="Chris' Birthday">1980-08-26</option>
-          <option label="Apollo 11 Moon Landing">1969-07-20</option>
-          <option label="DDay">1944-06-06</option>
-        </datalist>
+        <span>Current date: </span> <span id="currentDateFilter">*insert date*</span>
+        <input type="range" min="0" max="100" value="100" class="slider" id="dayRange" name="dayRange">
       </div>
     </div>
-
-
 
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
+    <script type='text/javascript' > 
+      var coronaTimeseriesData = null;
+      var dateOffset = null;
+    </script>
     <script src="main.js"></script>
     <script src="map.js"></script>
   </body>
