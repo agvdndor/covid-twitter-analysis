@@ -63,11 +63,21 @@ function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
 
+function handleFeatureClick(e){
+    zoomToFeature(e);
+    selectedCountry = e.target.feature.properties.countryname;
+    
+    if (selectedCountry in corona_country_translation){
+        selectedCountry = corona_country_translation[selectedCountry];
+    }
+    updateGraph(coronaChart, getCoronaData());
+}
+
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: handleFeatureClick
     });
 }
 
@@ -129,20 +139,20 @@ function AddCasesToJson(json, date_offset) {
                 if (key in populationData){
                     // cases per 100 000 inhabitants
                     cases = useful["confirmed"] * 100000 / populationData[key];
-                    cases = cases.toFixed(3);
+                    cases = Math.round(cases);
                 }else {
                     console.log(key + " could not be matched with population data");
                 }
             }
             
         }
+        country['properties']['countryname'] = country['properties']['ADMIN']
         country['properties']['confirmed'] = cases;
     });
     return json
 }
 
 function AddCasesToJsonAndLoadInMap(json, date_offset) {
-    console.log("map draw: " + json + "  " + date_offset );
     if (json == null) json = borderData;
     json = AddCasesToJson(json, date_offset);
     current_geojson_data = json;
