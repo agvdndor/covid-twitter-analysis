@@ -115,19 +115,22 @@ let coronaChart = new CanvasJS.Chart("coronaChartContainer", {
     data: [{
         type: "splineArea",
         showInLegend: true,
+        color: "#4F81FF",  // sets legend color
         name: "Confirmed cases",
         xValueFormatString: "DD MM YYYY",
         dataPoints: []
      },{
         type: "splineArea",
         showInLegend: true,
-        name: "Deaths",
+        color: "#A3CF61",  // sets legend color
+        name: "Recoveries",
         xValueFormatString: "DD MM YYYY",
         dataPoints: []
      },{
         type: "splineArea",
         showInLegend: true,
-        name: "Recoveries",
+        name: "Deaths",
+        color: "#EF6770",  // sets legend color
         xValueFormatString: "DD MM YYYY",
         dataPoints: []
      },
@@ -136,8 +139,8 @@ let coronaChart = new CanvasJS.Chart("coronaChartContainer", {
 
 let name_to_index_map = {
     'confirmed': 0,
-    'deaths': 1,
-    'recovered': 2,
+    'recovered': 1,
+    'deaths': 2,
 }
 
 function getCoronaData() {
