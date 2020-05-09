@@ -167,13 +167,13 @@ function getCoronaData() {
 }
 
 function getPopulationData() {
-    fetch("country_population_2020.json")
+    return fetch("country_population_2020.json")
     .then(data => data.json())
     .then(json => populationData = json)
 }
 
 function getCountryBorders() {
-    fetch("countries_borders.geojson")
+    return fetch("countries_borders.geojson")
         .then(data => data.json())
         .then(json => borderData = json)
 }
