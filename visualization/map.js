@@ -13,7 +13,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 // color scheme: https://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=9
 let colorscheme = ['#ffffcc','#ffeda0','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#bd0026','#800026'];
-let _grades = [0, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
+let _grades = [0, 50, 100, 200, 300, 400, 500, 600, 700];
 function getColor(d) {
     if (d === -1)
         return '#ffffff';
@@ -105,6 +105,9 @@ function LoadGeoJson(json) {
 }
 
 function AddCasesToJson(json, date_offset) {
+    if (json == null){
+        json = borderData;
+    }
     if (date_offset == null) {
         let country_data = coronaTimeseriesData["Afghanistan"];
         date_offset = country_data.length -1;
@@ -124,9 +127,11 @@ function AddCasesToJson(json, date_offset) {
                 cases = useful["confirmed"];
             } else{
                 if (key in populationData){
-                    cases = useful["confirmed"] / populationData[key];
+                    // cases per 100 000 inhabitants
+                    cases = useful["confirmed"] * 100000 / populationData[key];
+                    cases = cases.toFixed(3);
                 }else {
-                    console.log(key);
+                    console.log(key + " could not be matched with population data");
                 }
             }
             
@@ -137,29 +142,38 @@ function AddCasesToJson(json, date_offset) {
 }
 
 function AddCasesToJsonAndLoadInMap(json, date_offset) {
+    console.log("map draw: " + json + "  " + date_offset );
+    if (json == null) json = borderData;
     json = AddCasesToJson(json, date_offset);
     current_geojson_data = json;
     LoadGeoJson(json);
     return json;
 }
 
+function getCoronaData() {
+    return fetch("https://pomber.github.io/covid19/timeseries.json")
+    .then(response => response.json())
+    .then(json => coronaTimeseriesData=json)
+}
 
-// load data about country locations
-fetch("https://pomber.github.io/covid19/timeseries.json")
-.then(response => response.json())
-.then(json => coronaTimeseriesData=json)
-.then(() => {
-    // population
+function getPopulationData() {
     fetch("country_population_2020.json")
     .then(data => data.json())
     .then(json => populationData = json)
-    // borders
-    .then(() => {
-        fetch("countries_borders.geojson")
+}
+
+function getCountryBorders() {
+    fetch("countries_borders.geojson")
         .then(data => data.json())
-        .then(json => AddCasesToJsonAndLoadInMap(json));
-    })
-})
+        .then(json => borderData = json)
+}
+
+function getAllData(){
+    return Promise.all([getCoronaData(), getPopulationData(), getCountryBorders()])
+}
+
+getAllData()
+.then(() => AddCasesToJsonAndLoadInMap(borderData))
 // update UI elements as soon as possible
 .then(() => OnTimelineChanged());
 
@@ -173,7 +187,7 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Confirmed virus cases (most recent)</h4>' +  (props ?
+    this._div.innerHTML = '<h4>Confirmed virus cases (per 100k inhabitants)</h4>' +  (props ?
         '<b>' + props.ADMIN + '</b><br />' + props.confirmed + ' cases'
         : 'Hover over a country');
 };
