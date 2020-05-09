@@ -95,6 +95,14 @@ function handleFeatureClick(e){
     if (selectedCountry in corona_country_translation){
         selectedCountry = corona_country_translation[selectedCountry];
     }
+
+    let title = coronaChart.title.options.text;
+    if (title.includes(':')){
+        title = title.slice(0, title.indexOf(':'));
+    }
+    title += ": " + selectedCountry;
+    coronaChart.title.options.text = title;
+    
     updateGraph(coronaChart, getCoronaData());
 }
 
