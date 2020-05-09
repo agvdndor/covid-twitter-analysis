@@ -120,7 +120,16 @@ function AddCasesToJson(json, date_offset) {
         if (key in coronaTimeseriesData) {
             let country_corona_data = coronaTimeseriesData[key];
             let useful = country_corona_data[date_offset];
-            cases = useful["confirmed"];
+            if (populationData == null){
+                cases = useful["confirmed"];
+            } else{
+                if (key in populationData){
+                    cases = useful["confirmed"] / populationData[key];
+                }else {
+                    console.log(key);
+                }
+            }
+            
         }
         country['properties']['confirmed'] = cases;
     });
@@ -140,9 +149,16 @@ fetch("https://pomber.github.io/covid19/timeseries.json")
 .then(response => response.json())
 .then(json => coronaTimeseriesData=json)
 .then(() => {
-    fetch("countries_borders.geojson")
+    // population
+    fetch("country_population_2020.json")
     .then(data => data.json())
-    .then(json => AddCasesToJsonAndLoadInMap(json));
+    .then(json => populationData = json)
+    // borders
+    .then(() => {
+        fetch("countries_borders.geojson")
+        .then(data => data.json())
+        .then(json => AddCasesToJsonAndLoadInMap(json));
+    })
 })
 // update UI elements as soon as possible
 .then(() => OnTimelineChanged());
