@@ -1,12 +1,11 @@
 let twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     animationEnabled: true,
     title:{
-        text: "Monthly Expenses, 2016-17"
+        text: "Twitter interest of <keyword>"
     },
     backgroundColor: "#FFDBC0",
     axisY :{
         includeZero: false,
-        prefix: "$"
     },
     toolTip: {
         shared: true
@@ -17,7 +16,7 @@ let twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     data: [{
         type: "splineArea",
         showInLegend: true,
-        name: "Salaries",
+        name: "Positive",
         yValueFormatString: "$#,##0",
         xValueFormatString: "MMM YYYY",
         dataPoints: [
@@ -38,7 +37,7 @@ let twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     {
         type: "splineArea", 
         showInLegend: true,
-        name: "Office Cost",
+        name: "Negative",
         yValueFormatString: "$#,##0",
         dataPoints: [
             { x: new Date(2016, 2), y: 20100 },
@@ -58,7 +57,7 @@ let twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     {
         type: "splineArea", 
         showInLegend: true,
-        name: "Entertainment",
+        name: "Neutral",
         yValueFormatString: "$#,##0",     
         dataPoints: [
             { x: new Date(2016, 2), y: 10100 },
@@ -74,27 +73,7 @@ let twitterChart = new CanvasJS.Chart("twitterChartContainer", {
             { x: new Date(2017, 0), y: 8300 },
             { x: new Date(2017, 1), y: 6300 }
         ]
-     },
-    {
-        type: "splineArea", 
-        showInLegend: true,
-        yValueFormatString: "$#,##0",      
-        name: "Maintenance",
-        dataPoints: [
-            { x: new Date(2016, 2), y: 1700 },
-            { x: new Date(2016, 3), y: 2600 },
-            { x: new Date(2016, 4), y: 1000 },
-            { x: new Date(2016, 5), y: 1400 },
-            { x: new Date(2016, 6), y: 900 },
-            { x: new Date(2016, 7), y: 1000 },
-            { x: new Date(2016, 8), y: 1200 },
-            { x: new Date(2016, 9), y: 5000 },
-            { x: new Date(2016, 10), y: 1300 },
-            { x: new Date(2016, 11), y: 2300 },
-            { x: new Date(2017, 0), y: 2800 },
-            { x: new Date(2017, 1), y: 1300 }
-        ]
-    }]
+     }]
 });
 
 let coronaChart = new CanvasJS.Chart("coronaChartContainer", {
