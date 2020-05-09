@@ -94,3 +94,24 @@ document.getElementById("skip_back_7").onclick = () => skip(-7);
 document.getElementById("skip_back_1").onclick = () => skip(-1);
 document.getElementById("skip_front_1").onclick = () => skip(1);
 document.getElementById("skip_front_7").onclick = () => skip(7);
+
+function fullRefresh(){
+    RedrawMap();
+    info.update();
+    legend.remove();
+    legend.addTo(map);
+}
+
+function updateCoronaDataFocus() {
+    coronaFocus = corona_type_filter.value;
+    fullRefresh();
+}
+
+var corona_type_filter = document.getElementById("corona-filter");
+corona_type_filter.onchange = updateCoronaDataFocus;
+
+var absolute_relative_numbers_check = document.getElementById("check-absolute-numbers");
+absolute_relative_numbers_check.onchange = () => {
+    use_absolute_numbers = absolute_relative_numbers_check.checked;
+    fullRefresh();
+};

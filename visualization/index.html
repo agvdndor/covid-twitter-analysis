@@ -21,7 +21,17 @@
     </div>
 
     <div class="content grid-container">
-      <div class="controls grid-controls">
+      <div class="map-controls grid-map-controls">
+        <label for="corona-filter">Filter type of metric:</label>
+        <select id="corona-filter" onchange="TwitterFilterChanged()">
+          <option value="confirmed">Confirmed cases</option>
+          <option value="deaths">Deaths</option>
+          <option value="recovered">Recovered</option>
+        </select>
+        <input type="checkbox" id="check-absolute-numbers" name="check-absolute-numbers">
+        <label for="vehicle1"> Use absolute numbers</label><br>
+      </div>
+      <div class="chart-controls grid-chart-controls">
         <label for="filter">Twitter Filter:</label>
         <select id="filter" onchange="TwitterFilterChanged()">
           <option value="language">Language</option>

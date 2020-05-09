@@ -10,16 +10,41 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1Ijoiam9uYXN2ZHYiLCJhIjoiY2s4enZnb2twMGV6aDNtcHI5d3I2ZXM5NCJ9.P8DrzaqAPYTuEHJDY6dVOA'
 }).addTo(map);
 
+let coronaFocus = document.getElementById("corona-filter").value;
+let use_absolute_numbers = document.getElementById("check-absolute-numbers").checked;
 
 // color scheme: https://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=9
 let colorscheme = ['#ffffcc','#ffeda0','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#bd0026','#800026'];
-let _grades = [0, 50, 100, 200, 300, 400, 500, 600, 700];
+// for recovered cases, use positive colors: https://colorbrewer2.org/?type=sequential&scheme=YlGn&n=9
+let recovered_colorscheme = ['#ffffe5','#f7fcb9','#d9f0a3','#addd8e','#78c679','#41ab5d','#238443','#006837','#004529']
+let _grades_relative = {
+    'confirmed': [0, 50, 100, 200, 300, 400, 500, 600, 700],
+    'deaths': [0, 10, 20, 40, 50, 60, 70, 80, 90],
+    'recovered': [0, 50, 100, 200, 250, 300, 400, 500, 600],
+}
+let _grades_absolute = {
+    'confirmed': [0, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000],
+    'deaths': [0, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000],
+    'recovered': [0, 1000, 2000, 4000, 10000, 20000, 40000, 100000, 200000],
+}
+
+function getGrades(){
+    if (use_absolute_numbers) return _grades_absolute;
+    return _grades_relative;
+}
+
+
 function getColor(d) {
     if (d === -1)
         return '#ffffff';
-    
-    for (let i = 8; i >= 1; i--)
-        if (d > _grades[i]) return colorscheme[i];
+    let _grades = getGrades();
+    if (coronaFocus == "recovered") {
+        for (let i = 8; i >= 1; i--)
+            if (d > _grades[coronaFocus][i]) return recovered_colorscheme[i];
+    } else {
+        for (let i = 8; i >= 1; i--)
+            if (d > _grades[coronaFocus][i]) return colorscheme[i];
+    }
     return colorscheme[0];
 }
 
@@ -134,12 +159,15 @@ function AddCasesToJson(json, date_offset) {
             let country_corona_data = coronaTimeseriesData[key];
             let useful = country_corona_data[date_offset];
             if (populationData == null){
-                cases = useful["confirmed"];
+                cases = useful[coronaFocus];
             } else{
                 if (key in populationData){
-                    // cases per 100 000 inhabitants
-                    cases = useful["confirmed"] * 100000 / populationData[key];
-                    cases = Math.round(cases);
+                    cases = useful[coronaFocus];
+                    if (!use_absolute_numbers){
+                        // per 100 000 inhabitants
+                        cases = cases * 100000 / populationData[key];
+                        cases = Math.round(cases);
+                    } 
                 }else {
                     console.log(key + " could not be matched with population data");
                 }
@@ -197,7 +225,18 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Confirmed virus cases (per 100k inhabitants)</h4>' +  (props ?
+    let title = "";
+    if (coronaFocus == 'confirmed')
+        title = "Confirmed virus cases";
+    else if (coronaFocus == 'recovered')
+        title = "Confirmed recovered cases";
+    else
+        title = "Confirmed deaths";
+    
+    let note = "";
+    if (!use_absolute_numbers) note = "(per 100k inhabitants)";
+
+    this._div.innerHTML = '<h4>' + title + ' ' + note + '</h4>' +  (props ?
         '<b>' + props.ADMIN + '</b><br />' + props.confirmed + ' cases'
         : 'Hover over a country');
 };
@@ -209,7 +248,7 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = _grades,
+        grades = getGrades()[coronaFocus],
         labels = [];
 
     // loop through our density intervals and generate a label with a colored square for each interval
