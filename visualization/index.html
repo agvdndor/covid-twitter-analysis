@@ -31,20 +31,57 @@
         <input type="checkbox" id="check-absolute-numbers" name="check-absolute-numbers">
         <label for="vehicle1"> Use absolute numbers</label><br>
       </div>
+
+      <!-- Twitter Controls-->
       <div class="chart-controls grid-chart-controls">
-        <label for="filter">Twitter Filter:</label>
-        <select id="filter" onchange="TwitterFilterChanged()">
-          <option value="language">Language</option>
-          <option value="location">Location</option>
-        </select>
-        <div id="location-warning" class="tooltip" style="display: none"><i class="material-icons" style="font-size:20x;color:red">warning</i>
-          <span class="tooltiptext">Using location-based data can decrease the amount of processable data as people may have disabled location services.</span>
+        
+        <!-- Location -->
+        <div>
+          <label for="language">Language:</label>
+          <select name="language-picker-select" id="language-picker-select">
+            <option lang="all" value="all" selected>All</option>
+            <option lang="de" value="deutsch">Deutsch</option>
+            <option lang="en" value="english">English</option>
+            <option lang="fr" value="francais">Français</option>
+            <option lang="it" value="italiano">Italiano</option>
+            <!-- other language options -->
+          </select>
         </div>
 
-        <label for="keyword">Keyword:</label>
-        <input type="text" id="keyword" name="keyword">
+         <!-- Filter location-->
+         <div>
+          <label for="locationCheckbox">Location:</label>
+          <input type="checkbox" id="locationCheckbox" onclick="locationCheckbox()">
+          <!--<label for="location">Country/City:</label>-->
+          <input type="text" id="country_or_city" name="Country/City" disabled=true placeholder="Country/City">
+          <input type="text" id="radius" name="radius" disabled=true placeholder="radius (km)">
+          <div id="location-warning" class="tooltip" style="display: none"><i class="material-icons" style="font-size:20x;color:red">warning</i>
+            <span class="tooltiptext">Using location-based data can decrease the amount of processable data as people may have disabled location services.</span>
+          </div>
+        </div>
+
+        <!-- Begin and end date for search-->
+        <div>
+          <label for="begindate">Start Date:</label>
+          <input type="date" id="begindate" name="begindate">
+          <label for="enddate">End Date:</label>
+          <input type="date" id="enddate" name="enddate">
+        </div>
+        
+        <!-- Advanced keyword -->
+        <div>
+          <label for="keyword">Keyword:</label>
+          <input type="text" id="keyword" name="keyword">
+          
+          <div id="keyword-explanation" class="tooltip"><i class="material-icons" style="font-size:20x;color:grey">live_help</i>
+            <span class="tooltiptext">Format corresponding to Twitter's advanced search can be used. Example: (homemade OR fresh) AND (bread OR pastry)</span>
+          </div>
+        </div>
+
         <button id="keywordBtn">Search</button>
       </div>
+
+
       <!-- This div contains the Leaflet map -->
       <div class="grid-map">
         <div id="mapid"></div>
