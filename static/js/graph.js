@@ -161,4 +161,33 @@ window.onload = function () {
     twitterChart.render();
     coronaChart.render();
 }
+
+
+function scrapeTwitter(){
+    query = document.getElementById("keyword").value 
+    begindate = document.getElementById("begindate").value 
+    enddate = document.getElementById("enddate").value
+    locationUsed =  document.getElementById("locationCheckbox").value
+    location =  document.getElementById("country_or_city").value
+    radius =  document.getElementById("radius").value
+    lang =  document.getElementById("language-picker-select").value
     
+    $.ajax({
+        url: 'twitter_scraper',
+        type: 'POST',
+        data: {
+            "query": query,
+            'begindate': begindate,
+            'enddate': enddate,
+            'locationUsed': locationUsed,
+            'location': location,
+            'radius': radius,
+            'lang': lang 
+        },
+        success: declareGlobalConst(response)
+    })
+}
+
+function declareGlobalConst(response){
+    console.log(response)
+}

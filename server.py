@@ -25,3 +25,18 @@ def country_population():
 def country_borders():
     with open('static/json/countries_borders.geojson') as json_file:
         return json.load(json_file)
+
+
+@app.route('/twitter_scraper')
+def twitter_scraper():
+    query = request.args.get('query', default= '', type=str)
+    begindate = request.args.get('begindate', default= '', type=str)
+    enddate = request.args.get('enddate', default= '', type=str)
+    locationUsed = request.args.get('locationUsed', default= bool, type=False)
+    location = request.args.get('location', default= '', type=str)
+    radius = request.args.get('radius', default= 50, type=int)
+    lang =  request.args.get('lang', default= 'all', type=str)
+
+    print('{} {} {} {} {} {}'.format(query, begindate, enddate, locationUsed, location, radius))
+
+    return 'result'

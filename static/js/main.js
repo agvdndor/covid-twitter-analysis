@@ -7,6 +7,7 @@ let activeDate;
 function getNewKeyword() {
     let source = document.getElementById("keyword");
     current_keyword = source.value;
+    console.log("132")
 }
 
 // function TwitterFilterChanged(){
@@ -17,6 +18,35 @@ function getNewKeyword() {
 //         document.getElementById("location-warning").style.display = "none";
 //     }
 // }
+
+function twitterScrape() {
+    query = document.getElementById("keyword").value 
+    begindate = document.getElementById("begindate").value 
+    enddate = document.getElementById("enddate").value
+    locationUsed =  document.getElementById("locationCheckbox").value
+    location =  document.getElementById("country_or_city").value
+    radius =  document.getElementById("radius").value
+    lang =  document.getElementById("language-picker-select").value
+    
+    $.ajax({
+        url: 'twitter_scraper',
+        type: 'POST',
+        data: {
+            "query": query,
+            'begindate': begindate,
+            'enddate': enddate,
+            'locationUsed': locationUsed,
+            'location': location,
+            'radius': radius,
+            'lang': lang 
+        },
+        success: declareGlobalConst(response)
+    })
+}
+
+function declareGlobalConst(response){
+    console.log(response)
+}
 
 function locationCheckbox(){
     let checked = document.getElementById("locationCheckbox").checked;
@@ -130,3 +160,5 @@ absolute_relative_numbers_check.onchange = () => {
     use_absolute_numbers = absolute_relative_numbers_check.checked;
     fullRefresh();
 };
+
+
