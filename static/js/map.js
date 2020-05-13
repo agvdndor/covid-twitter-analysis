@@ -209,7 +209,7 @@ function getPopulationData() {
 }
 
 function getCountryBorders() {
-    return fetch("{{url_for('static', filename='json/countries_borders.geojson')}}")
+    return fetch("static/json/countries_borders.geojson")
         .then(data => data.json())
         .then(json => borderData = json)
 }
