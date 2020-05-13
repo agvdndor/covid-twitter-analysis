@@ -1,4 +1,4 @@
-let twitterChart = new CanvasJS.Chart("twitterChartContainer", {
+var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     animationEnabled: true,
     title:{
         text: "Twitter interest of <keyword>"

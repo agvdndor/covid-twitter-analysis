@@ -40,14 +40,13 @@ function twitterScrape() {
             'location': location,
             'radius': radius,
             'lang': lang 
-        }
-            //,
-        // success: declareGlobalConst(response)
+        },
+        success: declareGlobalConst
     });
 }
 
-function declareGlobalConst(response){
-    console.log(response)
+function declareGlobalConst(data){
+    console.log(data['dates'])
 }
 
 function locationCheckbox(){

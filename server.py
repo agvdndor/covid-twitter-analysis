@@ -1,5 +1,5 @@
 # Main server file
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 app = Flask(__name__)
 from server_utils import download_country_json
 import json
@@ -29,14 +29,20 @@ def country_borders():
 
 @app.route('/twitter_scraper')
 def twitter_scraper():
+    print("request received")
     query = request.args.get('query', default= '', type=str)
     begindate = request.args.get('begindate', default= '', type=str)
     enddate = request.args.get('enddate', default= '', type=str)
-    locationUsed = request.args.get('locationUsed', default= bool, type=False)
+    locationUsed = request.args.get('locationUsed', default= False, type=bool)
     location = request.args.get('location', default= '', type=str)
     radius = request.args.get('radius', default= 50, type=int)
     lang =  request.args.get('lang', default= 'all', type=str)
 
     print('{} {} {} {} {} {}'.format(query, begindate, enddate, locationUsed, location, radius))
 
-    return 'result'
+    return jsonify(
+        {
+            "dates": [1,2,3,4,5,6],
+            "pos": [4,8,9,7,5,3]
+        }
+    )
