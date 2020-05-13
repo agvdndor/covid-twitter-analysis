@@ -7,7 +7,6 @@ let activeDate;
 function getNewKeyword() {
     let source = document.getElementById("keyword");
     current_keyword = source.value;
-    console.log("132")
 }
 
 // function TwitterFilterChanged(){
@@ -20,28 +19,31 @@ function getNewKeyword() {
 // }
 
 function twitterScrape() {
-    query = document.getElementById("keyword").value 
-    begindate = document.getElementById("begindate").value 
-    enddate = document.getElementById("enddate").value
-    locationUsed =  document.getElementById("locationCheckbox").value
-    location =  document.getElementById("country_or_city").value
-    radius =  document.getElementById("radius").value
-    lang =  document.getElementById("language-picker-select").value
+    let query = document.getElementById("keyword").value 
+    let begindate = document.getElementById("begindate").value 
+    let enddate = document.getElementById("enddate").value
+    let locationUsed =  document.getElementById("locationCheckbox").checked
+    let location =  document.getElementById("country_or_city").value
+    let radius =  document.getElementById("radius").value
+    let lang =  document.getElementById("language-picker-select").value
+
+    console.log(query)
     
     $.ajax({
         url: 'twitter_scraper',
-        type: 'POST',
+        type: 'GET',
         data: {
-            "query": query,
-            'begindate': begindate,
-            'enddate': enddate,
+            "query" : query,
+            "begindate": begindate,
+            "enddate": enddate,
             'locationUsed': locationUsed,
             'location': location,
             'radius': radius,
             'lang': lang 
-        },
-        success: declareGlobalConst(response)
-    })
+        }
+            //,
+        // success: declareGlobalConst(response)
+    });
 }
 
 function declareGlobalConst(response){
