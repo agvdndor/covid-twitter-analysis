@@ -71,13 +71,21 @@ def time_analysis(query='', lang=None, location=None, radius=50, begindate=None,
 
     tweets_df_per_period = tweets_df_with_sentiment.set_index(tweets_df_with_sentiment['timestamp'])[['negative', 'neutral', 'positive']].resample('W').sum()
 
-    neg = tweets_df_per_period['negative'].to_list()
-    neutr = tweets_df_per_period['neutral'].to_list()
-    pos = tweets_df_per_period['positive'].to_list()
+    neg = np.array(tweets_df_per_period['negative'].to_list())
+    neutr = np.array(tweets_df_per_period['neutral'].to_list())
+    pos = np.array(tweets_df_per_period['positive'].to_list())
+
+    neg_neutr = neg + neutr
+    neg_neutr_pos = neg_neutr + pos
+
+    neg = neg.tolist()
+    neg_neutr = neg_neutr.tolist()
+    neg_neutr_pos = neg_neutr_pos.tolist()
+
     dates = [x.strftime("%d %b") for x in tweets_df_per_period.index.tolist()]
     return {
         "dates": dates,
         "neg": neg,
-        "neutr": neutr,
-        "pos": pos
+        "neutr": neg_neutr,
+        "pos": neg_neutr_pos
     }

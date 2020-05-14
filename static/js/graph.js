@@ -1,3 +1,15 @@
+var neg = []
+
+var neg_neutr = []
+
+var neg_neutr_pos =  []
+
+function updateTwitterData(arg_neg,arg_neg_neutr,arg_neg_neutr_pos){
+    neg = arg_neg
+    neg_neutr = arg_neg_neutr
+    neg_neutr_pos = arg_neg_neutr_pos
+}
+
 var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     animationEnabled: true,
     title:{
@@ -19,60 +31,21 @@ var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
         name: "Positive",
         yValueFormatString: "$#,##0",
         xValueFormatString: "MMM YYYY",
-        dataPoints: [
-            { x: new Date(2016, 2), y: 30000 },
-            { x: new Date(2016, 3), y: 35000 },
-            { x: new Date(2016, 4), y: 30000 },
-            { x: new Date(2016, 5), y: 30400 },
-            { x: new Date(2016, 6), y: 20900 },
-            { x: new Date(2016, 7), y: 31000 },
-            { x: new Date(2016, 8), y: 30200 },
-            { x: new Date(2016, 9), y: 30000 },
-            { x: new Date(2016, 10), y: 33000 },
-            { x: new Date(2016, 11), y: 38000 },
-            { x: new Date(2017, 0),  y: 38900 },
-            { x: new Date(2017, 1),  y: 39000 }
-        ]
+        dataPoints: neg
      },
     {
         type: "splineArea", 
         showInLegend: true,
         name: "Negative",
         yValueFormatString: "$#,##0",
-        dataPoints: [
-            { x: new Date(2016, 2), y: 20100 },
-            { x: new Date(2016, 3), y: 16000 },
-            { x: new Date(2016, 4), y: 14000 },
-            { x: new Date(2016, 5), y: 18000 },
-            { x: new Date(2016, 6), y: 18000 },
-            { x: new Date(2016, 7), y: 21000 },
-            { x: new Date(2016, 8), y: 22000 },
-            { x: new Date(2016, 9), y: 25000 },
-            { x: new Date(2016, 10), y: 23000 },
-            { x: new Date(2016, 11), y: 25000 },
-            { x: new Date(2017, 0), y: 26000 },
-            { x: new Date(2017, 1), y: 25000 }
-        ]
+        dataPoints: neg_neutr
      },
     {
         type: "splineArea", 
         showInLegend: true,
         name: "Neutral",
         yValueFormatString: "$#,##0",     
-        dataPoints: [
-            { x: new Date(2016, 2), y: 10100 },
-            { x: new Date(2016, 3), y: 6000 },
-            { x: new Date(2016, 4), y: 3400 },
-            { x: new Date(2016, 5), y: 4000 },
-            { x: new Date(2016, 6), y: 9000 },
-            { x: new Date(2016, 7), y: 3900 },
-            { x: new Date(2016, 8), y: 4200 },
-            { x: new Date(2016, 9), y: 5000 },
-            { x: new Date(2016, 10), y: 14300 },
-            { x: new Date(2016, 11), y: 12300 },
-            { x: new Date(2017, 0), y: 8300 },
-            { x: new Date(2017, 1), y: 6300 }
-        ]
+        dataPoints: neg_neutr_pos
      }]
 });
 
