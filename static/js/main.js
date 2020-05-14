@@ -49,22 +49,9 @@ function declareGlobalConst(data){
     console.log(data['dates'])
     console.log(data['neg'])
 
-    var neg = [
-        { x: new Date(2016, 2), y: 30000 },
-        { x: new Date(2016, 3), y: 35000 },
-        { x: new Date(2016, 4), y: 30000 },
-        { x: new Date(2016, 5), y: 30400 },
-        { x: new Date(2016, 6), y: 20900 },
-        { x: new Date(2016, 7), y: 31000 },
-        { x: new Date(2016, 8), y: 30200 },
-        { x: new Date(2016, 9), y: 30000 },
-        { x: new Date(2016, 10), y: 33000 },
-        { x: new Date(2016, 11), y: 38000 },
-        { x: new Date(2017, 0),  y: 38900 },
-        { x: new Date(2017, 1),  y: 39000 }
-    ]
-
-    updateTwitterData(neg, [], [])
+    console.log(new Date(data['dates'][0]))
+ 
+    updateTwitterData(data)
 
 }
 

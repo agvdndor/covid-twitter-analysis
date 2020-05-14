@@ -4,11 +4,6 @@ var neg_neutr = []
 
 var neg_neutr_pos =  []
 
-function updateTwitterData(arg_neg,arg_neg_neutr,arg_neg_neutr_pos){
-    neg = arg_neg
-    neg_neutr = arg_neg_neutr
-    neg_neutr_pos = arg_neg_neutr_pos
-}
 
 var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     animationEnabled: true,
@@ -28,7 +23,8 @@ var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     data: [{
         type: "splineArea",
         showInLegend: true,
-        name: "Positive",
+        name: "Negative + Neutral + Positive",
+        color: 'green',
         yValueFormatString: "$#,##0",
         xValueFormatString: "MMM YYYY",
         dataPoints: neg
@@ -36,14 +32,16 @@ var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     {
         type: "splineArea", 
         showInLegend: true,
-        name: "Negative",
+        color: 'orange',
+        name: "Negative + Neutral",
         yValueFormatString: "$#,##0",
         dataPoints: neg_neutr
      },
     {
         type: "splineArea", 
         showInLegend: true,
-        name: "Neutral",
+        color: 'red',
+        name: "Negative",
         yValueFormatString: "$#,##0",     
         dataPoints: neg_neutr_pos
      }]
@@ -88,6 +86,36 @@ let coronaChart = new CanvasJS.Chart("coronaChartContainer", {
      },
     ]
 });
+
+let name_to_index_map_twitter = {
+    'negative': 0,
+    'negative + neutral': 1,
+    'negative + neutral + positive': 2,
+}
+
+function updateTwitterData(data){
+    // clear current data
+    for (let i = 0; i < twitterChart.data.length; i++){
+        while(twitterChart.data[i].dataPoints.length > 0) { // clear old contents
+            twitterChart.data[i].dataPoints.pop();
+        }
+    }
+   
+    for(let i = 0; i < data['dates'].length; i++){
+        date = new Date(data['dates'][i])
+        neg_val = data['neg'][i]
+        neg_neutr_val = data['neutr'][i]
+        neg_neutr_pos_val = data['pos'][i]
+
+        twitterChart.data[2].dataPoints.push({x: date, y: neg_val})
+        twitterChart.data[1].dataPoints.push({x: date, y: neg_neutr_val})
+        twitterChart.data[0].dataPoints.push({x: date, y: neg_neutr_pos_val})
+    }
+
+ 
+    twitterChart.render()
+}
+
 
 let name_to_index_map = {
     'confirmed': 0,
