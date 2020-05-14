@@ -4,6 +4,8 @@ app = Flask(__name__)
 from server_utils import download_country_json
 import json
 
+from twitter.twitter_scraper import time_analysis
+
 
 @app.route('/')
 def home():
@@ -36,13 +38,18 @@ def twitter_scraper():
     locationUsed = request.args.get('locationUsed', default= False, type=bool)
     location = request.args.get('location', default= '', type=str)
     radius = request.args.get('radius', default= 50, type=int)
-    lang =  request.args.get('lang', default= 'all', type=str)
-
+    lang =  request.args.get('lang', default= 'None', type=str)
+    
+    if lang == 'all':
+        lang = None
+        
     print('{} {} {} {} {} {}'.format(query, begindate, enddate, locationUsed, location, radius))
 
-    return jsonify(
-        {
-            "dates": [1,2,3,4,5,6],
-            "pos": [4,8,9,7,5,3]
-        }
-    )
+
+    if locationUsed:
+        result_dict = time_analysis(query=query, lang=lang, location=location, radius=radius, begindate=begindate, enddate=enddate)
+    else:
+        result_dict = time_analysis(query=query, lang=lang, begindate=begindate, enddate=enddate)
+
+    print(result_dict)
+    return jsonify(result_dict)
