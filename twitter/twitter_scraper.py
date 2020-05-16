@@ -82,7 +82,7 @@ def time_analysis(query='', lang=None, location=None, radius=50, begindate=None,
     neg_neutr = neg_neutr.tolist()
     neg_neutr_pos = neg_neutr_pos.tolist()
 
-    dates = [x.strftime("%d %b") for x in tweets_df_per_period.index.tolist()]
+    dates = [x.strftime("%Y-%m-%d") for x in tweets_df_per_period.index.tolist()]
     return {
         "dates": dates,
         "neg": neg,
