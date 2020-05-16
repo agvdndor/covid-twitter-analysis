@@ -11,7 +11,7 @@ var last_twitter_date = null;
 var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     animationEnabled: true,
     title:{
-        text: "Twitter interest of <keyword>"
+        text: "Twitter interest of keyword"
     },
     backgroundColor: "#FFDBC0",
     axisY :{
@@ -126,6 +126,7 @@ let name_to_index_map = {
 }
 
 function getCoronaData() {
+    if (selectedCountry == null) return [];
     let types = ['confirmed', 'deaths', 'recovered'];
     let data = {};
     types.forEach(type => data[type]= []);
@@ -137,7 +138,7 @@ function getCoronaData() {
         let entry = country_data[i];
 
         let date = new Date(entry.date);
-        if (date >= first_twitter_date && date <= last_twitter_date){
+        if ((first_twitter_date == null && last_twitter_date == null) || (date >= first_twitter_date && date <= last_twitter_date)){
             types.forEach(type => data[type].push({x: date, y: entry[type]}));
         }
     }
