@@ -35,7 +35,8 @@ def twitter_scraper():
     query = request.args.get('query', default= '', type=str)
     begindate = request.args.get('begindate', default= '', type=str)
     enddate = request.args.get('enddate', default= '', type=str)
-    locationUsed = request.args.get('locationUsed', default= False, type=bool)
+    locationUsed = True if request.args.get('locationUsed') == 'true' else False
+    #locationUsed = request.args.get('locationUsed', default= False, type=bool)
     location = request.args.get('location', default= '', type=str)
     radius = request.args.get('radius', default= 50, type=int)
     lang =  request.args.get('lang', default= 'None', type=str)

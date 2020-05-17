@@ -22,12 +22,12 @@ function twitterScrape() {
     let query = document.getElementById("keyword").value 
     let begindate = document.getElementById("begindate").value 
     let enddate = document.getElementById("enddate").value
-    let locationUsed =  document.getElementById("locationCheckbox").checked
+    let locationUsed = document.getElementById("locationCheckbox").checked;
     let location =  document.getElementById("country_or_city").value
     let radius =  document.getElementById("radius").value
     let lang =  document.getElementById("language-picker-select").value
 
-    console.log(query);
+    console.log(locationUsed);
     
     $.ajax({
         url: 'twitter_scraper',
