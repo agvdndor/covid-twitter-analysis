@@ -196,7 +196,7 @@ function AddCasesToJsonAndLoadInMap(json, date_offset) {
     return json;
 }
 
-function getCoronaData() {
+function fetchCoronaData() {
     return fetch("https://pomber.github.io/covid19/timeseries.json")
     .then(response => response.json())
     .then(json => coronaTimeseriesData=json)
@@ -215,7 +215,7 @@ function getCountryBorders() {
 }
 
 function getAllData(){
-    return Promise.all([getCoronaData(), getPopulationData(), getCountryBorders()])
+    return Promise.all([fetchCoronaData(), getPopulationData(), getCountryBorders()])
 }
 
 getAllData()

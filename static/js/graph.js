@@ -4,11 +4,14 @@ var neg_neutr = []
 
 var neg_neutr_pos =  []
 
+var first_twitter_date = null;
+var last_twitter_date = null;
+
 
 var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
     animationEnabled: true,
     title:{
-        text: "Twitter interest of <keyword>"
+        text: "Twitter interest of keyword"
     },
     backgroundColor: "#FFDBC0",
     axisY :{
@@ -25,8 +28,6 @@ var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
         showInLegend: true,
         name: "Negative + Neutral + Positive",
         color: 'green',
-        yValueFormatString: "$#,##0",
-        xValueFormatString: "MMM YYYY",
         dataPoints: neg
      },
     {
@@ -34,15 +35,13 @@ var twitterChart = new CanvasJS.Chart("twitterChartContainer", {
         showInLegend: true,
         color: 'orange',
         name: "Negative + Neutral",
-        yValueFormatString: "$#,##0",
         dataPoints: neg_neutr
      },
     {
         type: "splineArea", 
         showInLegend: true,
         color: 'red',
-        name: "Negative",
-        yValueFormatString: "$#,##0",     
+        name: "Negative",     
         dataPoints: neg_neutr_pos
      }]
 });
@@ -100,7 +99,9 @@ function updateTwitterData(data){
             twitterChart.data[i].dataPoints.pop();
         }
     }
-   
+    dates = data['dates'];
+    first_twitter_date = new Date(dates[0]);
+    last_twitter_date = new Date(dates[dates.length - 1]);
     for(let i = 0; i < data['dates'].length; i++){
         date = new Date(data['dates'][i])
         neg_val = data['neg'][i]
@@ -114,6 +115,7 @@ function updateTwitterData(data){
 
  
     twitterChart.render()
+    updateGraph(coronaChart, getCoronaData());  // also update corona chart to match the twitter chart date limits
 }
 
 
@@ -124,17 +126,21 @@ let name_to_index_map = {
 }
 
 function getCoronaData() {
+    if (selectedCountry == null) return [];
     let types = ['confirmed', 'deaths', 'recovered'];
     let data = {};
     types.forEach(type => data[type]= []);
     
     let country_data = coronaTimeseriesData[selectedCountry];
     let size = country_data.length;
+
     for (let i=0;i<size; i++) {
         let entry = country_data[i];
 
-        let date = entry.date;
-        types.forEach(type => data[type].push({x: new Date(date), y: entry[type]}));
+        let date = new Date(entry.date);
+        if ((first_twitter_date == null && last_twitter_date == null) || (date >= first_twitter_date && date <= last_twitter_date)){
+            types.forEach(type => data[type].push({x: date, y: entry[type]}));
+        }
     }
     return data;
 }

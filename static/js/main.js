@@ -27,7 +27,7 @@ function twitterScrape() {
     let radius =  document.getElementById("radius").value
     let lang =  document.getElementById("language-picker-select").value
 
-    console.log(query)
+    console.log(query);
     
     $.ajax({
         url: 'twitter_scraper',

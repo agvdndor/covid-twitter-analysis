@@ -25,6 +25,10 @@
 
     <div class="content grid-container">
       <div class="map-controls grid-map-controls">
+        <br>
+        <br>
+        <br>
+        <br>
         <label for="corona-filter">Filter type of metric:</label>
         <select id="corona-filter" onchange="TwitterFilterChanged()">
           <option value="confirmed">Confirmed cases</option>
@@ -80,9 +84,9 @@
           <div id="keyword-explanation" class="tooltip"><i class="material-icons" style="font-size:20x;color:grey">live_help</i>
             <span class="tooltiptext">Format corresponding to Twitter's advanced search can be used. Example: (homemade OR fresh) AND (bread OR pastry)</span>
           </div>
+          <button onclick="twitterScrape()" id="keywordBtn" >Search</button>
         </div>
 
-        <button onclick="twitterScrape()" id="keywordBtn" >Search</button>
       </div>
 
 
