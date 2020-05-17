@@ -9,12 +9,27 @@ function getNewKeyword() {
     current_keyword = source.value;
 }
 
-function TwitterFilterChanged(){
-    let value = document.getElementById("filter").value;
-    if (value == "location") {
+// function TwitterFilterChanged(){
+//     let value = document.getElementById("filter").value;
+//     if (value == "location") {
+//         document.getElementById("location-warning").style.display = "inline";
+//     } else {
+//         document.getElementById("location-warning").style.display = "none";
+//     }
+// }
+
+function locationCheckbox(){
+    let checked = document.getElementById("locationCheckbox").checked;
+    if(checked == true){
         document.getElementById("location-warning").style.display = "inline";
-    } else {
-        document.getElementById("location-warning").style.display = "none";
+        document.getElementById("country_or_city").disabled = false;
+        document.getElementById("radius").disabled = false;
+    }
+    else {
+            document.getElementById("location-warning").style.display = "none";
+            document.getElementById("country_or_city").disabled = true;
+            document.getElementById("radius").disabled = true;
+            
     }
 }
 
