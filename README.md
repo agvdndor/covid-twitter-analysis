@@ -8,7 +8,7 @@
 - [Acknowledgement](#acknowledgement)
 
 ## General Idea
-The COVID-19 pandemic is shaking up our daily lives and has resulted in a series of odd trends. Suddenly people started hoarding toilet paper, shaving their heads bald and collectively baking their own bread. This has lead to empty toilet paper racks and an increased (online) sale of electric hair clippers and bread machines. Due to limited real life social interaction, social media plays an even bigger role in the spreading and adaptation of these trends than usual. Consequently, noticing them early could enable unique business/humanitarian opportunities.
+The COVID-19 pandemic is shaking up our daily lives and has resulted in a series of odd trends. Suddenly people have started hoarding toilet paper, shaving their heads bald and collectively baking their own bread. This has lead to empty shelves in the toilet paper aisle and an increased (online) sale of electric hair clippers and bread machines. Due to limited real life social interaction, social media plays an even bigger role in the spreading and adaptation of these trends than usual. Consequently, noticing them early could enable unique business/humanitarian/political opportunities.
 
 This tool allows a user to provide one or more keywords (such as "bread machine") and a location (e.g. "Belgium") and returns the evolution of twitter's interest in that keyword based on number of tweets/retweets involving that keyword during a certain time window. In addition, an existing COVID-19 Data API is used to also identify the evolution of number of contaminated/dead/recovered patients during that time window for that location. The necessary visualizations for both enable a user to correlate the interest in certain products/terms to the stage of the crisis that a location is in. Future business (and in parallel humanitarian) opportunities can then be discovered for locations that are currently behind on the curve.
 
@@ -54,7 +54,19 @@ python -m flask run
 ```
 
 ## Use
+The tool can be accessed at [localhost:5000](http:localhost:5000)
+
+- Use the slider or buttons under the world map to explore the evolution of the spread of the pandemic on a global scale.
+- Select a country on the map to see the evolution of that country in specific. 
+- Use the search fields on the top right to show the number of tweets in combination with a basic sentiment analysis by specifying:
+  - language (auto-determined by twitter)
+  - location and radius: Be cautious, users that have not enabled location might be filtered out by using this option, but not using this option results in significantly longer query times
+  - startdate and enddate
+  - query: This field allows advanced queries, e.g. "(homemade OR artisanal) AND (bread OR pastry)" 
+
+The user should be aware that this tool does not use the (paid) premium twitter API. Hence, very generic twitter search options will result in a long loading time. 
 
 ## Example
+
 
 ## Acknowledgement
