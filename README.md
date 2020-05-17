@@ -69,8 +69,9 @@ The tool can be accessed at [localhost:5000](http:localhost:5000)
 ## Example
 Suppose we want to know what the impact was of the pandemic on people's workout habits. More specifically, was there a trend of people working out frome home and thus needing their own gym equipment? Furthermore, how did this trend evolve during the lockdown? We will focus our analysis on the United Kingdom and choose London as a representative location for Twitter behavior. (query = "(home OR virtual) AND (workout OR gym)")
 
-![example](imgs/example.png)
+![example](imgs/example.PNG)
 
 The figure seems to confirm our suspicion that there was a significant shift in workout habits. Especially during the beginning of the pandemic in the UK was there a peak in the popularity of home workouts, according to Twitter.
 
 ## Acknowledgement
+
