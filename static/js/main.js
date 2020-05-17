@@ -3,6 +3,7 @@ let base_date = new Date("2020-1-22"); // start of timeseries data
 let last_date = null; // end of timeseries data
 let num_days;
 let activeDate;
+document.getElementById('loading').style.display = 'none';
 
 function getNewKeyword() {
     let source = document.getElementById("keyword");
@@ -19,16 +20,20 @@ function getNewKeyword() {
 // }
 
 function twitterScrape() {
-    let query = document.getElementById("keyword").value 
-    let begindate = document.getElementById("begindate").value 
-    let enddate = document.getElementById("enddate").value
+    let query = document.getElementById("keyword").value; 
+    let begindate = document.getElementById("begindate").value; 
+    let enddate = document.getElementById("enddate").value;
     let locationUsed = document.getElementById("locationCheckbox").checked;
-    let location =  document.getElementById("country_or_city").value
-    let radius =  document.getElementById("radius").value
-    let lang =  document.getElementById("language-picker-select").value
+    let location =  document.getElementById("country_or_city").value;
+    let radius =  document.getElementById("radius").value;
+    let lang =  document.getElementById("language-picker-select").value;
 
     console.log(locationUsed);
     
+    // add loading gif
+    document.getElementById('loading').style.display = 'block';
+    
+
     $.ajax({
         url: 'twitter_scraper',
         type: 'GET',
@@ -41,11 +46,20 @@ function twitterScrape() {
             'radius': radius,
             'lang': lang 
         },
-        success: declareGlobalConst
+        success: declareGlobalConst,
+        error: function(){
+            document.getElementById('loading').style.display = 'none';
+        }
     });
+
+    
 }
 
 function declareGlobalConst(data){
+    // add loading gif
+    document.getElementById('loading').style.display = 'none';
+    
+
     console.log(data['dates'])
     console.log(data['neg'])
 
