@@ -2,7 +2,7 @@
 
 ## Overview
 - [General Idea](#general-idea)
-- [Setup](#setup)
+- [Getting Started](#getting-started)
 - [Use](#use)
 - [Example](#example)
 - [Acknowledgement](#acknowledgement)
@@ -12,12 +12,13 @@ The COVID-19 pandemic is shaking up our daily lives and has resulted in a series
 
 This tool allows a user to provide one or more keywords (such as "bread machine") and a location (e.g. "Belgium") and returns the evolution of twitter's interest in that keyword based on number of tweets/retweets involving that keyword during a certain time window. In addition, an existing COVID-19 Data API is used to also identify the evolution of number of contaminated/dead/recovered patients during that time window for that location. The necessary visualizations for both enable a user to correlate the interest in certain products/terms to the stage of the crisis that a location is in. Future business (and in parallel humanitarian) opportunities can then be discovered for locations that are currently behind on the curve.
 
-## Setup
-Running the server locally requires
+## Getting started
+### Prerequisites
 - python3 (explicitly tested for python3.6.9)
 - pip
 
-### Clone the repository
+### Installation
+#### Clone the repository
 ```
 # clone
 git clone https://github.ugent.be/agvdndor/bds-project-2020.git
@@ -26,7 +27,7 @@ git clone https://github.ugent.be/agvdndor/bds-project-2020.git
 cd bds-project-2020/
 ```
 
-### Setting up de environment
+#### Setting up the environment
 ```
 # install virtualenv
 pip install virtualenv
@@ -44,7 +45,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Start flask server
+#### Start flask server
 ```
 # indicate flask app source file
 export FLASK_APP=server.py
@@ -69,8 +70,11 @@ The tool can be accessed at [localhost:5000](http:localhost:5000)
 ## Example
 Suppose we want to know what the impact was of the pandemic on people's workout habits. More specifically, was there a trend of people working out frome home and thus needing their own gym equipment? Furthermore, how did this trend evolve during the lockdown? We will focus our analysis on the United Kingdom and choose London as a representative location for Twitter behavior. (query = "(home OR virtual) AND (workout OR gym)")
 
-![example](imgs/example.png)
+![example](imgs/example.PNG)
 
 The figure seems to confirm our suspicion that there was a significant shift in workout habits. Especially during the beginning of the pandemic in the UK was there a peak in the popularity of home workouts, according to Twitter.
 
-## Acknowledgement
+## Acknowledgements
+- [covid19 timeseries](https://github.com/pomber/covid19): JSON time-series of coronavirus cases (confirmed, deaths and recovered) per country - updated daily
+- [twitterscraper](https://github.com/taspinar/twitterscraper): One of the bigger disadvantages of the Search API is that you can only access Tweets written in the past 7 days. This is a major bottleneck for anyone looking for older past data to make a model from. With TwitterScraper there is no such limitation.
+
