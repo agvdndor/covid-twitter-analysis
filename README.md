@@ -64,9 +64,13 @@ The tool can be accessed at [localhost:5000](http:localhost:5000)
   - startdate and enddate
   - query: This field allows advanced queries, e.g. "(homemade OR artisanal) AND (bread OR pastry)" 
 
-The user should be aware that this tool does not use the (paid) premium twitter API. Hence, very generic twitter search options will result in a long loading time. 
+**The user should be aware that this tool does not use the (paid) premium twitter API. Hence, very generic twitter search options will result in a long loading time.** 
 
 ## Example
+Suppose we want to know what the impact was of the pandemic on people's workout habits. More specifically, was there a trend of people working out frome home and thus needing their own gym equipment? Furthermore, how did this trend evolve during the lockdown? We will focus our analysis on the United Kingdom and choose London as a representative location for Twitter behavior. (query = "(home OR virtual) AND (workout OR gym)")
 
+![example](imgs/example.png)
+
+The figure seems to confirm our suspicion that there was a significant shift in workout habits. Especially during the beginning of the pandemic in the UK was there a peak in the popularity of home workouts, according to Twitter.
 
 ## Acknowledgement
