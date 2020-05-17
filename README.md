@@ -13,6 +13,45 @@ The COVID-19 pandemic is shaking up our daily lives and has resulted in a series
 This tool allows a user to provide one or more keywords (such as "bread machine") and a location (e.g. "Belgium") and returns the evolution of twitter's interest in that keyword based on number of tweets/retweets involving that keyword during a certain time window. In addition, an existing COVID-19 Data API is used to also identify the evolution of number of contaminated/dead/recovered patients during that time window for that location. The necessary visualizations for both enable a user to correlate the interest in certain products/terms to the stage of the crisis that a location is in. Future business (and in parallel humanitarian) opportunities can then be discovered for locations that are currently behind on the curve.
 
 ## Setup
+Running the server locally requires
+- python3 (explicitly tested for python3.6.9)
+- pip
+
+### Clone the repository
+```
+# clone
+git clone https://github.ugent.be/agvdndor/bds-project-2020.git
+
+# change directory
+cd bds-project-2020/
+```
+
+### Setting up de environment
+```
+# install virtualenv
+pip install virtualenv
+
+# create the environment
+virtualenv -p python3 venv
+
+# activate the environment
+# Linux/Mac
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
+
+# install dependencies
+pip install -r requirements.txt
+```
+
+### Start flask server
+```
+# indicate flask app source file
+export FLASK_APP=server.py
+
+# run flask
+python -m flask run
+```
 
 ## Use
 
