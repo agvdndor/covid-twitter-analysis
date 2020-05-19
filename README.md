@@ -88,7 +88,7 @@ Suppose we want to know what the impact was of the pandemic on people's workout 
 
 ![example](imgs/example.PNG)
 
-The figure seems to confirm our suspicion that there was a significant shift in workout habits. Especially during the beginning of the pandemic in the UK was there a peak in the popularity of home workouts, according to Twitter.
+The figure seems to confirm our suspicion that there was a significant shift in workout habits. Especially during the beginning of the pandemic in the UK there was a peak in the popularity of home workouts, according to Twitter.
 
 ## Acknowledgements
 
