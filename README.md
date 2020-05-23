@@ -9,6 +9,8 @@
 - [Acknowledgement](#acknowledgement)
 
 ## General Idea
+[business solution (video)](https://www.youtube.com/watch?v=fiLf1oAHOT4&feature=youtu.be)  
+[technical demo walkthrough (video)](https://www.youtube.com/watch?v=y-QdwOCgXqU&feature=youtu.be)
 
 The COVID-19 pandemic is shaking up our daily lives and has resulted in a series of odd trends. Suddenly people have started hoarding toilet paper, shaving their heads bald and collectively baking their own bread. This has lead to empty shelves in the toilet paper aisle and an increased (online) sale of electric hair clippers and bread machines. Due to limited real life social interaction, social media plays an even bigger role in the spreading and adaptation of these trends than usual. Consequently, noticing them early could enable unique business/humanitarian/political opportunities.
 
