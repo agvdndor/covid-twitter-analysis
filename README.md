@@ -1,4 +1,4 @@
-# BDS PROJECT 2020 - GROUP 29
+# COVID Twitter Analysis
 
 ## Overview
 
